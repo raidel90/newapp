@@ -39,13 +39,15 @@ type SearchSessionsProps = PropsWithChildren<{
 const SearchSessions = (props: SearchSessionsProps) => {
   const [searchText, setSearchText] = useState('');
 
+  let textInputRef: TextInput | null;
+
   const handleSearch = (text: string) => {
     setSearchText(text);
     props.getSearchText(text);
   };
 
   const clearSearch = () => {
-    this.textInput.clear();
+    textInputRef?.clear();
     props.getSearchText('');
   };
 
@@ -53,7 +55,7 @@ const SearchSessions = (props: SearchSessionsProps) => {
     <View style={sharedStyles.container}>
       <TextInput
         ref={(ref) => {
-          this.textInput = ref;
+          textInputRef = ref;
         }}
         style={sharedStyles.searchInput}
         value={searchText}
